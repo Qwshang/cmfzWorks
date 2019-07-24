@@ -23,6 +23,7 @@ public class TestAlbum {
         List<Album> albums = albumDao.selectAll(0, 5);
         for (Album album : albums) {
             System.out.println(album);
+            System.out.println("qqqqqqq");
         }
 
 
