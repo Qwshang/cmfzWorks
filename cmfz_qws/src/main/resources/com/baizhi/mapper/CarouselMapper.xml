@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.CarouselDao">
+<!--    &#45;&#45; 轮播图ID
+    carousel_id          varchar(50) not null,
+    &#45;&#45; 名称
+    title                 varchar(50),
+    &#45;&#45; 图片路径
+    imgPath              varchar(200),
+    &#45;&#45; 图片状态
+    status               varchar(10),
+    &#45;&#45; 创建时间
+    create_time          date,
+    private String carouselId;
+    private String title;
+    private String imgPath;
+    private String status;
+    private String createTime;-->
+    <!--增-->
+    <insert id="insert">
+        insert into c_carousel values(#{id,jdbcType=VARCHAR},#{title},#{imgPath},#{status},#{createTime})
+    </insert>
+    <!--删-->
+    <delete id="delete">
+        delete from c_carousel where carousel_id=#{id}
+    </delete>
+    <!--改-->
+    <update id="update">
+        update c_carousel set title=#{title},imgPath=#{imgPath},status=#{status},create_time=#{createTime} where carousel_id=#{id}
+    </update>
+    <!--查一条-->
+    <select id="selectById" resultType="Carousel">
+        select carousel_id id,title,imgPath,status,create_time createTime from c_carousel where carousel_id=#{id}
+    </select>
+    <!--查总条数-->
+    <select id="selectTotalCount" resultType="java.lang.Integer">
+        select count(*) from c_carousel
+    </select>
+    <!--分页查-->
+    <select id="selectByPage" resultType="Carousel">
+        select carousel_id id,title,imgPath,status,create_time createTime from c_carousel order by carousel_id desc limit ${(currentPage-1)*pageSize},#{pageSize}
+    </select>
+    <!--修改图片路径-->
+    <update id="updateimgPath">
+        update c_carousel set imgPath=#{imgPath} where carousel_id=#{id}
+    </update>
+
+</mapper>

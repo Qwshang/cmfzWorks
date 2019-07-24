@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.ArticleDao">
+<!--  文章ID article_id   上师ID guru_id   文章标题 title    内容 content   发布时间 publish_time  -->
+    <!--分页查询所有-->
+    <select id="selectAll" resultType="Article">
+        select article_id id,guru_id guruId,title,content,publish_time publishTime
+        from c_article order by article_id desc
+        limit #{begin},#{rows}
+    </select>
+
+    <!--查总条数-->
+    <select id="selectRecords" resultType="java.lang.Integer">
+        select count(*) from c_article
+    </select>
+
+    <!--查一条-->
+    <select id="selectById" resultType="User">
+        select article_id articleId,guru_id guruId,title,content,publish_time publishTime
+        from c_article where article_id=#{id}
+    </select>
+
+    <!--添加-->
+    <insert id="insert">
+        insert into c_article values(#{id},#{guruId},#{title},#{content},#{publishTime})
+    </insert>
+
+    <!--删除-->
+    <delete id="deleteById">
+        delete from c_article where article_id=#{id}
+    </delete>
+</mapper>
